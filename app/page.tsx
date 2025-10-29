@@ -12,15 +12,14 @@ export default function Home() {
       <header className="border-b border-white/10 backdrop-blur-sm bg-dark-900/50 sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center">
               <Image
                 src="/logo.png"
-                alt="XNET Logo"
+                alt="Logo"
                 width={40}
                 height={40}
                 className="rounded-lg"
               />
-              <h1 className="text-xl font-bold text-white">XNET</h1>
             </div>
 
             <nav className="flex items-center space-x-6">
@@ -48,10 +47,10 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-6 py-16">
+      <section className="container mx-auto px-6 py-10">
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="text-5xl font-bold text-white mb-4 bg-gradient-to-r from-primary-400 via-accent-purple to-accent-aqua bg-clip-text text-transparent">
-            Welcome to XNET
+            XNET
           </h2>
           <p className="text-xl text-gray-400">
             Human Decisions, Machine Speed
@@ -63,7 +62,7 @@ export default function Home() {
       <section id="apps" className="container mx-auto px-6 py-12">
         <div className="mb-8">
           <h3 className="text-3xl font-bold text-white mb-2">Applications</h3>
-          <p className="text-gray-400">Access your internal tools and services</p>
+          <p className="text-gray-400">Access XNET tools and services</p>
         </div>
         <ApplicationsGrid />
       </section>

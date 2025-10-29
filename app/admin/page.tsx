@@ -76,16 +76,15 @@ export default function AdminDashboard() {
       <header className="border-b border-white/10 backdrop-blur-sm bg-dark-900/50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Link href="/" className="flex items-center space-x-3">
+            <div className="flex items-center">
+              <Link href="/" className="flex items-center">
                 <Image
                   src="/logo.png"
-                  alt="XNET Logo"
+                  alt="Logo"
                   width={40}
                   height={40}
                   className="rounded-lg"
                 />
-                <h1 className="text-xl font-bold text-white">XNET Admin</h1>
               </Link>
             </div>
             <Link
