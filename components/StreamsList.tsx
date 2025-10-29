@@ -189,7 +189,7 @@ export default function StreamsList() {
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="grid grid-cols-2 gap-2 text-xs mb-3">
                 <div>
                   <span className="text-gray-500">Received:</span>
                   <p className="text-white font-medium">{formatBytes(stream.bytesReceived)}</p>
@@ -199,6 +199,29 @@ export default function StreamsList() {
                   <p className="text-white font-medium">{stream.readers}</p>
                 </div>
               </div>
+
+              {/* RTSP Link */}
+              {stream.type.toLowerCase().includes('rtsp') && (
+                <div className="mt-3 pt-3 border-t border-white/10">
+                  <p className="text-xs text-gray-500 mb-1">Stream URL:</p>
+                  <div className="flex items-center gap-2">
+                    <code className="flex-1 text-xs bg-dark-950 px-2 py-1 rounded text-primary-400 truncate">
+                      rtsp://vhub.chaos1.au:8554/{stream.name}
+                    </code>
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(`rtsp://vhub.chaos1.au:8554/${stream.name}`);
+                      }}
+                      className="text-gray-400 hover:text-white transition-colors"
+                      title="Copy URL"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>

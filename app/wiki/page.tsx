@@ -16,8 +16,8 @@ export default function WikiPage() {
                 <Image
                   src="/logo.png"
                   alt="Logo"
-                  width={40}
-                  height={40}
+                  width={100}
+                  height={100}
                   className="rounded-lg"
                 />
               </Link>
