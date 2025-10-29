@@ -1,10 +1,11 @@
 // ABOUTME: Main landing page component for the intranet
-// ABOUTME: Displays navigation, applications dashboard, file library, and wiki
+// ABOUTME: Displays navigation, applications dashboard, file library, wiki, and live streams
 import Link from 'next/link';
 import Image from 'next/image';
 import ApplicationsGrid from '@/components/ApplicationsGrid';
 import FileLibrary from '@/components/FileLibrary';
 import WikiGrid from '@/components/WikiGrid';
+import StreamsList from '@/components/StreamsList';
 
 export default function Home() {
   return (
@@ -29,6 +30,12 @@ export default function Home() {
                 className="text-gray-300 hover:text-white transition-colors"
               >
                 Applications
+              </Link>
+              <Link
+                href="#streams"
+                className="text-gray-300 hover:text-white transition-colors"
+              >
+                Streams
               </Link>
               <Link
                 href="#wiki"
@@ -72,6 +79,15 @@ export default function Home() {
           <p className="text-gray-400">Access XNET tools and services</p>
         </div>
         <ApplicationsGrid />
+      </section>
+
+      {/* Live Streams */}
+      <section id="streams" className="container mx-auto px-6 py-12">
+        <div className="mb-8">
+          <h3 className="text-3xl font-bold text-white mb-2">Live Streams</h3>
+          <p className="text-gray-400">Active MediaMTX streams and channels</p>
+        </div>
+        <StreamsList />
       </section>
 
       {/* Wiki / Knowledge Base */}
