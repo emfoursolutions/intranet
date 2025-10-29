@@ -60,8 +60,8 @@ export default function ApplicationsGrid() {
 
   return (
     <div>
-      {/* Category Filter */}
-      {categories.length > 1 && (
+      {/* Category Filter - Hidden for now */}
+      {/* {categories.length > 1 && (
         <div className="flex flex-wrap gap-2 mb-6">
           {categories.map(cat => (
             <button
@@ -77,7 +77,7 @@ export default function ApplicationsGrid() {
             </button>
           ))}
         </div>
-      )}
+      )} */}
 
       {/* Applications Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
