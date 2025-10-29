@@ -35,6 +35,12 @@ export default function Home() {
                 Wiki
               </Link>
               <Link
+                href="/files"
+                className="text-gray-300 hover:text-white transition-colors"
+              >
+                Files
+              </Link>
+              <Link
                 href="/admin"
                 className="px-4 py-2 rounded-lg bg-primary-600 hover:bg-primary-700 text-white transition-colors"
               >
