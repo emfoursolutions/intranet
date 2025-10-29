@@ -1,18 +1,27 @@
 // ABOUTME: API route to fetch MediaMTX streams from vhub.chaos1.au
-// ABOUTME: Acts as a proxy to avoid CORS issues and provides stream list
+// ABOUTME: Acts as a proxy to avoid CORS issues and provides stream list with Basic Auth
 import { NextResponse } from 'next/server';
 
-const MEDIAMTX_API = 'https://vhub.chaos1.au:9997/v3/paths/list';
+const MEDIAMTX_API = process.env.MEDIAMTX_API_URL || 'https://vhub.chaos1.au:9997/v3/paths/list';
+const MEDIAMTX_USERNAME = process.env.MEDIAMTX_USERNAME;
+const MEDIAMTX_PASSWORD = process.env.MEDIAMTX_PASSWORD;
 
 export async function GET() {
   try {
+    const headers: HeadersInit = {
+      'Accept': 'application/json',
+    };
+
+    // Add Basic Auth if credentials are provided
+    if (MEDIAMTX_USERNAME && MEDIAMTX_PASSWORD) {
+      const credentials = Buffer.from(`${MEDIAMTX_USERNAME}:${MEDIAMTX_PASSWORD}`).toString('base64');
+      headers['Authorization'] = `Basic ${credentials}`;
+    }
+
     const response = await fetch(MEDIAMTX_API, {
       method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-      },
-      // Disable SSL verification if needed for self-signed certs
-      // @ts-ignore
+      headers,
+      // @ts-ignore - Node.js fetch options
       rejectUnauthorized: false,
     });
 
