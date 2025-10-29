@@ -18,7 +18,15 @@ Run this SQL in your MariaDB client or command line:
 
 ```sql
 CREATE DATABASE IF NOT EXISTS xnet_landing;
+
+-- If using a dedicated user (not root), grant required permissions:
+CREATE USER IF NOT EXISTS 'xnet_user'@'localhost' IDENTIFIED BY 'your_password';
+GRANT ALL PRIVILEGES ON xnet_landing.* TO 'xnet_user'@'localhost';
+GRANT CREATE ON *.* TO 'xnet_user'@'localhost';
+FLUSH PRIVILEGES;
 ```
+
+**Important**: The `GRANT CREATE ON *.*` permission is required for Prisma migrations to work. Prisma creates temporary "shadow databases" during migrations to validate schema changes.
 
 ### 3. Run Database Migrations
 
@@ -123,7 +131,30 @@ If port 3000 is busy:
 npm run dev -- -p 3001
 ```
 
-### Prisma Issues
+### Prisma Shadow Database Error
+
+If you get an error like "User was denied access on the database `prisma_migrate_shadow_db_...`":
+
+**Solution**: Grant CREATE permission to your database user:
+
+```sql
+GRANT CREATE ON *.* TO 'your_user'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+Then retry the migration:
+
+```bash
+npx prisma migrate dev --name init
+```
+
+**Alternative**: If you can't grant CREATE permission, use `db push` instead (not recommended for production):
+
+```bash
+npx prisma db push
+```
+
+### Other Prisma Issues
 
 Clear Prisma cache and regenerate:
 

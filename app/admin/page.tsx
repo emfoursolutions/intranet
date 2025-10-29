@@ -4,6 +4,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 export default function AdminDashboard() {
@@ -76,10 +77,14 @@ export default function AdminDashboard() {
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Link href="/" className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-aqua rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">X</span>
-                </div>
+              <Link href="/" className="flex items-center space-x-3">
+                <Image
+                  src="/logo.png"
+                  alt="XNET Logo"
+                  width={40}
+                  height={40}
+                  className="rounded-lg"
+                />
                 <h1 className="text-xl font-bold text-white">XNET Admin</h1>
               </Link>
             </div>

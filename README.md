@@ -42,8 +42,11 @@ Create a database in MariaDB:
 CREATE DATABASE xnet_landing;
 CREATE USER 'xnet_user'@'localhost' IDENTIFIED BY 'your_password';
 GRANT ALL PRIVILEGES ON xnet_landing.* TO 'xnet_user'@'localhost';
+GRANT CREATE ON *.* TO 'xnet_user'@'localhost';
 FLUSH PRIVILEGES;
 ```
+
+**Note**: The `GRANT CREATE ON *.*` is required for Prisma to create a shadow database during migrations. This is a temporary database Prisma uses to validate migrations.
 
 ### 3. Environment Configuration
 

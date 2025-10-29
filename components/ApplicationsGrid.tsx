@@ -87,25 +87,36 @@ export default function ApplicationsGrid() {
             href={app.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-card-hover p-6 group"
+            className="relative bg-gradient-to-br from-dark-800 to-dark-900 rounded-xl p-6 group hover:from-dark-700 hover:to-dark-800 transition-all duration-300 border border-white/10 hover:border-primary-500/50 overflow-hidden"
           >
-            <div
-              className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 text-2xl"
-              style={{ backgroundColor: app.color }}
-            >
-              {app.icon || '📱'}
+            {/* Hover Arrow */}
+            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
             </div>
-            <h4 className="text-lg font-semibold text-white mb-2 group-hover:text-primary-400 transition-colors">
-              {app.name}
-            </h4>
-            {app.description && (
-              <p className="text-sm text-gray-400 line-clamp-2">{app.description}</p>
-            )}
-            {app.ssoEnabled && (
-              <span className="inline-block mt-3 text-xs px-2 py-1 rounded bg-accent-aqua/20 text-accent-aqua">
-                SSO Enabled
-              </span>
-            )}
+
+            <div className="flex items-start gap-4">
+              <div
+                className="w-14 h-14 rounded-xl flex items-center justify-center text-3xl flex-shrink-0 shadow-lg"
+                style={{ backgroundColor: app.color }}
+              >
+                {app.icon || '📱'}
+              </div>
+              <div className="flex-1 min-w-0">
+                <h4 className="text-lg font-semibold text-white mb-1 group-hover:text-primary-400 transition-colors">
+                  {app.name}
+                </h4>
+                {app.description && (
+                  <p className="text-sm text-gray-400 line-clamp-2">{app.description}</p>
+                )}
+                {app.ssoEnabled && (
+                  <span className="inline-block mt-2 text-xs px-2 py-1 rounded bg-accent-aqua/20 text-accent-aqua">
+                    SSO
+                  </span>
+                )}
+              </div>
+            </div>
           </a>
         ))}
       </div>

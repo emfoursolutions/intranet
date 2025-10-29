@@ -7,8 +7,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "XNET Intranet",
-  description: "Internal company portal and resource hub",
+  title: "XNET Portal",
+  description: "XNET resource hub",
 };
 
 export default function RootLayout({

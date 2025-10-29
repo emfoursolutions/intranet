@@ -1,6 +1,7 @@
 // ABOUTME: Main landing page component for the intranet
 // ABOUTME: Displays navigation, applications dashboard, and file library
 import Link from 'next/link';
+import Image from 'next/image';
 import ApplicationsGrid from '@/components/ApplicationsGrid';
 import FileLibrary from '@/components/FileLibrary';
 
@@ -11,10 +12,14 @@ export default function Home() {
       <header className="border-b border-white/10 backdrop-blur-sm bg-dark-900/50 sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-aqua rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">X</span>
-              </div>
+            <div className="flex items-center space-x-3">
+              <Image
+                src="/logo.png"
+                alt="XNET Logo"
+                width={40}
+                height={40}
+                className="rounded-lg"
+              />
               <h1 className="text-xl font-bold text-white">XNET</h1>
             </div>
 
@@ -49,7 +54,7 @@ export default function Home() {
             Welcome to XNET
           </h2>
           <p className="text-xl text-gray-400">
-            Your central hub for internal applications and company resources
+            Human Decisions, Machine Speed
           </p>
         </div>
       </section>
@@ -67,7 +72,7 @@ export default function Home() {
       <section id="files" className="container mx-auto px-6 py-12">
         <div className="mb-8">
           <h3 className="text-3xl font-bold text-white mb-2">File Library</h3>
-          <p className="text-gray-400">Browse and download company documents and resources</p>
+          <p className="text-gray-400">Browse and download XNET documents and resources</p>
         </div>
         <FileLibrary />
       </section>
