@@ -1,0 +1,68 @@
+// ABOUTME: Prisma schema defining database models for intranet platform
+// ABOUTME: Includes User, File, Category, and Application models for MariaDB
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  role         String   @default("user")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  color     String   @default("#0ea5e9")
+  icon      String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  files File[]
+
+  @@map("categories")
+}
+
+model File {
+  id          String   @id @default(cuid())
+  name        String
+  description String?  @db.Text
+  filePath    String   @map("file_path")
+  fileSize    Int      @map("file_size")
+  mimeType    String   @map("mime_type")
+  categoryId  String   @map("category_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@index([categoryId])
+  @@map("files")
+}
+
+model Application {
+  id          String   @id @default(cuid())
+  name        String
+  description String?  @db.Text
+  url         String
+  ssoEnabled  Boolean  @default(false) @map("sso_enabled")
+  icon        String?
+  category    String?
+  color       String   @default("#0ea5e9")
+  sortOrder   Int      @default(0) @map("sort_order")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("applications")
+}
