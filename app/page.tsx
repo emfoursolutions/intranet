@@ -1,8 +1,9 @@
 // ABOUTME: Main landing page component for the intranet
-// ABOUTME: Displays navigation and applications dashboard
+// ABOUTME: Displays navigation, applications dashboard, and file library
 import Link from 'next/link';
 import Image from 'next/image';
 import ApplicationsGrid from '@/components/ApplicationsGrid';
+import FileLibrary from '@/components/FileLibrary';
 
 export default function Home() {
   return (
@@ -70,6 +71,15 @@ export default function Home() {
           <p className="text-gray-400">Access XNET tools and services</p>
         </div>
         <ApplicationsGrid />
+      </section>
+
+      {/* File Library */}
+      <section id="files" className="container mx-auto px-6 py-12">
+        <div className="mb-8">
+          <h3 className="text-3xl font-bold text-white mb-2">File Library</h3>
+          <p className="text-gray-400">Browse and download XNET documents and resources</p>
+        </div>
+        <FileLibrary />
       </section>
 
       {/* Footer */}
