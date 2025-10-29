@@ -16,8 +16,8 @@ export default function Home() {
               <Image
                 src="/logo.png"
                 alt="Logo"
-                width={40}
-                height={40}
+                width={100}
+                height={100}
                 className="rounded-lg"
               />
             </div>
@@ -47,7 +47,7 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-6 py-10">
+      <section className="container mx-auto px-6 py-8">
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="text-5xl font-bold text-white mb-4 bg-gradient-to-r from-primary-400 via-accent-purple to-accent-aqua bg-clip-text text-transparent">
             XNET
