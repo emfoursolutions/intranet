@@ -66,3 +66,18 @@ model Application {
 
   @@map("applications")
 }
+
+model WikiArticle {
+  id          String   @id @default(cuid())
+  title       String
+  description String?  @db.Text
+  content     String   @db.Text
+  icon        String?
+  color       String   @default("#0ea5e9")
+  category    String?
+  sortOrder   Int      @default(0) @map("sort_order")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("wiki_articles")
+}

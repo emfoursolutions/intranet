@@ -13,6 +13,7 @@ export default function AdminDashboard() {
     applications: 0,
     files: 0,
     categories: 0,
+    wiki: 0,
   });
 
   useEffect(() => {
@@ -21,22 +22,25 @@ export default function AdminDashboard() {
 
   const fetchStats = async () => {
     try {
-      const [appsRes, filesRes, catsRes] = await Promise.all([
+      const [appsRes, filesRes, catsRes, wikiRes] = await Promise.all([
         fetch('/api/applications'),
         fetch('/api/files'),
         fetch('/api/categories'),
+        fetch('/api/wiki'),
       ]);
 
-      const [apps, files, cats] = await Promise.all([
+      const [apps, files, cats, wiki] = await Promise.all([
         appsRes.json(),
         filesRes.json(),
         catsRes.json(),
+        wikiRes.json(),
       ]);
 
       setStats({
         applications: apps.length,
         files: files.length,
         categories: cats.length,
+        wiki: wiki.length,
       });
     } catch (error) {
       console.error('Error fetching stats:', error);
@@ -53,6 +57,14 @@ export default function AdminDashboard() {
       color: '#0ea5e9',
     },
     {
+      title: 'Wiki',
+      count: stats.wiki,
+      description: 'Manage knowledge base articles',
+      href: '/admin/wiki',
+      icon: '📖',
+      color: '#22d3ee',
+    },
+    {
       title: 'Files',
       count: stats.files,
       description: 'Upload and manage file library',
@@ -66,7 +78,7 @@ export default function AdminDashboard() {
       description: 'Organize files into categories',
       href: '/admin/categories',
       icon: '🏷️',
-      color: '#22d3ee',
+      color: '#075985',
     },
   ];
 

@@ -4,6 +4,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface Application {
   id: string;
@@ -98,10 +99,20 @@ export default function ApplicationsGrid() {
 
             <div className="flex items-start gap-4">
               <div
-                className="w-14 h-14 rounded-xl flex items-center justify-center text-3xl flex-shrink-0 shadow-lg"
+                className="w-14 h-14 rounded-xl flex items-center justify-center text-3xl flex-shrink-0 shadow-lg overflow-hidden"
                 style={{ backgroundColor: app.color }}
               >
-                {app.icon || '📱'}
+                {app.icon?.startsWith('/') ? (
+                  <Image
+                    src={app.icon}
+                    alt={app.name}
+                    width={56}
+                    height={56}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span>{app.icon || '📱'}</span>
+                )}
               </div>
               <div className="flex-1 min-w-0">
                 <h4 className="text-lg font-semibold text-white mb-1 group-hover:text-primary-400 transition-colors">
