@@ -39,7 +39,14 @@ export default function StreamsList() {
 
   const fetchStreams = async () => {
     try {
-      const response = await fetch('/api/streams');
+      const response = await fetch('/api/streams', {
+        cache: 'no-store',
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+        },
+      });
       if (response.ok) {
         const streamData = await response.json();
         setData(streamData);

@@ -6,6 +6,10 @@ const MEDIAMTX_API = process.env.MEDIAMTX_API_URL || 'https://vhub.chaos1.au:999
 const MEDIAMTX_USERNAME = process.env.MEDIAMTX_USERNAME;
 const MEDIAMTX_PASSWORD = process.env.MEDIAMTX_PASSWORD;
 
+// Disable caching for this route
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET() {
   try {
     const headers: HeadersInit = {
@@ -18,21 +22,21 @@ export async function GET() {
       headers['Authorization'] = `Basic ${credentials}`;
     }
 
-    const response = await fetch(MEDIAMTX_API, {
+    const fetchResponse = await fetch(MEDIAMTX_API, {
       method: 'GET',
       headers,
       // @ts-ignore - Node.js fetch options
       rejectUnauthorized: false,
     });
 
-    if (!response.ok) {
+    if (!fetchResponse.ok) {
       return NextResponse.json(
         { error: 'Failed to fetch streams from MediaMTX' },
-        { status: response.status }
+        { status: fetchResponse.status }
       );
     }
 
-    const data = await response.json();
+    const data = await fetchResponse.json();
 
     // Transform the data to a simpler format
     const streams = data.items?.map((item: any) => ({
@@ -46,10 +50,17 @@ export async function GET() {
       readers: item.readers?.length || 0,
     })) || [];
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       itemCount: data.itemCount || 0,
       streams,
     });
+
+    // Set cache control headers to prevent caching
+    response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    response.headers.set('Pragma', 'no-cache');
+    response.headers.set('Expires', '0');
+
+    return response;
   } catch (error) {
     console.error('Error fetching MediaMTX streams:', error);
     return NextResponse.json(
