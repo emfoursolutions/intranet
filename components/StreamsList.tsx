@@ -207,17 +207,23 @@ export default function StreamsList() {
                 </div>
               </div>
 
-              {/* RTSP Link */}
-              {stream.type.toLowerCase().includes('rtsp') && (
+              {/* Stream URL - RTSP or RTMP */}
+              {(stream.type.toLowerCase().includes('rtsp') || stream.type.toLowerCase().includes('rtmp')) && (
                 <div className="mt-3 pt-3 border-t border-white/10">
                   <p className="text-xs text-gray-500 mb-1">Stream URL:</p>
                   <div className="flex items-center gap-2">
                     <code className="flex-1 text-xs bg-dark-950 px-2 py-1 rounded text-primary-400 truncate">
-                      rtsp://vhub.chaos1.au:8554/{stream.name}
+                      {stream.type.toLowerCase().includes('rtmp')
+                        ? `rtmp://vhub.chaos1.au:1935/${stream.name}`
+                        : `rtsp://vhub.chaos1.au:8554/${stream.name}`
+                      }
                     </code>
                     <button
                       onClick={() => {
-                        navigator.clipboard.writeText(`rtsp://vhub.chaos1.au:8554/${stream.name}`);
+                        const url = stream.type.toLowerCase().includes('rtmp')
+                          ? `rtmp://vhub.chaos1.au:1935/${stream.name}`
+                          : `rtsp://vhub.chaos1.au:8554/${stream.name}`;
+                        navigator.clipboard.writeText(url);
                       }}
                       className="text-gray-400 hover:text-white transition-colors"
                       title="Copy URL"
